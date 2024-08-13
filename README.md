@@ -1,75 +1,58 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 and Docker
+## Building and running
+### How to build an image
+First of all make sure you have Docker installed.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
+To build an image run the following command in the project root.
 ```bash
-# npm
-npm install
+docker build -t nuxt/docker-demo:latest .
+```
+This command builds an image following the specifications in the Dockerfile.
 
-# pnpm
-pnpm install
+The image is built using the env variables from the `.env.prod` file.
 
-# yarn
-yarn install
-
-# bun
-bun install
+### How to start a container from the image
+Create and run a new container from the image you just build by running:
+```bash
+docker run -p 3000:3000 nuxt/docker-demo:latest
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+### How to start the container with different env variables
+As long as you follow the naming conventions for the runtime config specified in [the nuxt documentation](https://nuxt.com/docs/guide/going-further/runtime-config#environment-variables) you can do so as such:
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+docker run --env NUXT_PUBLIC_SOME_VALUE="hello there!" -p 3000:3000 nuxt/docker-demo:latest
 ```
-
-## Production
-
-Build the application for production:
-
+or as such
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+docker run --env-file ./.env.run -p 3000:3000 nuxt/docker-demo:latest
 ```
-
-Locally preview production build:
-
+## Quick Docker reminder
+You can list your images by running:
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+docker images
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+You can delete an image by running:
+```bash
+docker rmi <image_id>
+```
+You can list your containers by running:
+```bash
+docker ps -a
+```
+You can stop a containers by running:
+```bash
+docker stop <container_id>
+```
+You can list delete a container by running:
+```bash
+docker rm <container_id>
+```
+## Additional resources
+- https://docs.docker.com/reference/cli/docker/container/run/
+- https://docs.docker.com/reference/cli/docker/buildx/build/
+- https://docs.docker.com/reference/cli/docker/container/ls/
+- https://docs.docker.com/reference/cli/docker/container/run/
+- https://docs.docker.com/reference/cli/docker/container/stop/
+- https://docs.docker.com/reference/cli/docker/container/rm/
+- https://docs.docker.com/reference/dockerfile/
+- https://dev.to/sliplane/minimizing-nuxt-3-docker-images-5d5g
