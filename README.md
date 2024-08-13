@@ -1,4 +1,5 @@
 # Nuxt 3 and Docker
+This repository shows how you can build an image of your Nuxt app and create a container running it. Additionally, it shows how to handle env variables while building the image and running a container.
 ## Building and running
 ### How to build an image
 First of all make sure you have Docker installed.
