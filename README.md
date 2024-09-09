@@ -6,11 +6,9 @@ First of all make sure you have Docker installed.
 
 To build an image run the following command in the project root.
 ```bash
-docker build -t nuxt/docker-demo:latest .
+docker build  -t nuxt/docker-demo:latest .
 ```
-This command builds an image following the specifications in the Dockerfile.
-
-The image is built using the env variables from the `.env.prod` file.
+This command builds an image following the specifications in the Dockerfile without using any env vars.
 
 ### How to start a container from the image
 Create and run a new container from the image you just build by running:
