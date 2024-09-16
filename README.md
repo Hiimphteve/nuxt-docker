@@ -55,3 +55,26 @@ docker rm <container_id>
 - https://docs.docker.com/reference/cli/docker/container/rm/
 - https://docs.docker.com/reference/dockerfile/
 - https://dev.to/sliplane/minimizing-nuxt-3-docker-images-5d5g
+
+## Misc
+Starting and killing background processes with yarn
+```bash
+yarn dev --dotenv .env.run & # start yarn in background
+top # see running processes e.g. node
+sudo lsof -i -P | grep LISTEN | grep :$PORT # get processes with open ports e.g. node
+kill -9 <PID> # kill certain process with <PID>
+```
+Testing with different envs
+```bash
+yarn install playwright # setup playwright
+yarn dev --dotenv .env.run # start yarn server
+yarn test # run all tests with vitest in browser
+```
+Running different types of tests
+```bash
+vitest run # to run once, without the watcher
+# args
+vitest run tests/components/ # run all tests in components dir
+vitest run tests/e2e/ # run all tests in unit e2e
+vitest run tests/unit/ # run all tests in unit dir
+```
